@@ -1,0 +1,16 @@
+{
+  "name": "catalogo-monitoracao",
+  "version": "1.0.0",
+  "description": "Exemplo do catalogo de monitoracao Darede",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve . -p 3000"
+  },
+  "keywords": ["finops", "darede", "monitoracao"],
+  "author": "Darede",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
