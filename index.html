@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativo de Planos FinOps - Darede</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #11713F 0%, #0C502C 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            padding: 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .phase-header {
+            background: linear-gradient(135deg, #11713F 0%, #0C502C 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 15px 20px;
+            text-align: left;
+            border: none;
+        }
+
+        .plan-header {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-bottom: 3px solid;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .plan-header.essential {
+            border-bottom-color: #6c757d;
+            color: #495057;
+        }
+
+        .plan-header.pro {
+            border-bottom-color: #11713F;
+            color: #11713F;
+        }
+
+        .plan-header.ultimate {
+            border-bottom-color: #F1A22D;
+            color: #F1A22D;
+            position: relative;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            background: #F1A22D;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .feature-row {
+            border-bottom: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .feature-row:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .feature-name {
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #333;
+            border-right: 1px solid #e9ecef;
+            position: relative;
+            background: white;
+        }
+
+        .info-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: #6c757d;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 16px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 8px;
+            cursor: help;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .info-icon:hover {
+            background: #11713F;
+            transform: scale(1.1);
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: normal;
+            white-space: nowrap;
+            max-width: 300px;
+            white-space: normal;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #333;
+        }
+
+        .info-icon:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .feature-value {
+            padding: 15px 20px;
+            text-align: center;
+            font-weight: 600;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .feature-value:last-child {
+            border-right: none;
+        }
+
+        .check {
+            color: #11713F;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #dc3545;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .frequency {
+            color: #F1A22D;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            color: #11713F;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .comparison-table {
+                font-size: 12px;
+            }
+            
+            .feature-name,
+            .feature-value {
+                padding: 12px 15px;
+            }
+            
+            .tooltip {
+                max-width: 250px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .comparison-table {
+                font-size: 11px;
+            }
+            
+            .feature-name,
+            .feature-value {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Comparativo de Planos FinOps</h1>
+            <p>Escolha o plano ideal para sua jornada de otimização de custos na nuvem</p>
+        </div>
+
+        <div class="table-container">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="plan-header" style="width: 40%;">Recursos</th>
+                        <th class="plan-header essential" style="width: 20%;">FinOps Essential</th>
+                        <th class="plan-header pro" style="width: 20%;">FinOps Pro</th>
+                        <th class="plan-header ultimate" style="width: 20%;">
+                            FinOps Ultimate
+                            <span class="coming-soon">Em breve</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Onboarding -->
+                    <tr>
+                        <td colspan="4" class="phase-header">Onboarding</td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Entendimento da Cloud
+                            <span class="info-icon">i
+                                <div class="tooltip">Análise completa da infraestrutura cloud atual, identificando recursos, custos e oportunidades de otimização</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Estrutura de Contas
+                            <span class="info-icon">i
+                                <div class="tooltip">Organização e estruturação das contas cloud para melhor governança e controle de custos</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Consumo Mensal
+                            <span class="info-icon">i
+                                <div class="tooltip">Relatório detalhado do consumo mensal de recursos cloud com análise de tendências</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Política de Tags
+                            <span class="info-icon">i
+                                <div class="tooltip">Definição e implementação de políticas de tagueamento para organização e rastreamento de custos</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+
+                    <!-- Foundation -->
+                    <tr>
+                        <td colspan="4" class="phase-header">Foundation</td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Setup de Alarmes
+                            <span class="info-icon">i
+                                <div class="tooltip">Configuração de alertas automáticos para monitoramento de custos e anomalias de gastos</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Assess Maturidade
+                            <span class="info-icon">i
+                                <div class="tooltip">Avaliação do nível de maturidade FinOps da organização com base em frameworks reconhecidos</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Plano de Maturidade
+                            <span class="info-icon">i
+                                <div class="tooltip">Além do Assess, entregamos o plano pro cliente no módulo Spaces para ele fazer o acompanhamento</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Criação Dash Custom.
+                            <span class="info-icon">i
+                                <div class="tooltip">Desenvolvimento de dashboards personalizados para visualização específica de métricas de negócio</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Setup Automações
+                            <span class="info-icon">i
+                                <div class="tooltip">Setup de automações seguindo o módulo Autofix da Pier para otimização automática de recursos</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Tagueamento
+                            <span class="info-icon">i
+                                <div class="tooltip">Implementação prática da política de tags em todos os recursos cloud da organização</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Revisão Pilar de Custos
+                            <span class="info-icon">i
+                                <div class="tooltip">Análise detalhada seguindo o pilar de otimização de custos do Well-Architected Framework</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+
+                    <!-- Operation -->
+                    <tr>
+                        <td colspan="4" class="phase-header">Operation</td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Criação de Novos Dashs
+                            <span class="info-icon">i
+                                <div class="tooltip">Desenvolvimento contínuo de novos dashboards conforme necessidades emergentes do negócio</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Suporte Dashboards
+                            <span class="info-icon">i
+                                <div class="tooltip">Suporte técnico e manutenção dos dashboards existentes com atualizações e correções</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Suporte Alertas
+                            <span class="info-icon">i
+                                <div class="tooltip">Manutenção e ajustes dos alertas configurados, incluindo novos alertas conforme necessário</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Gestão Maturidade
+                            <span class="info-icon">i
+                                <div class="tooltip">Além de atribuir e planejar, a ideia aqui é gerenciar a maturidade do cliente, cobrar pelas ações etc, acompanhar e reportar o estágio dele</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Atendimento Consultivo
+                            <span class="info-icon">i
+                                <div class="tooltip">Suporte especializado com consultores FinOps para orientação estratégica e resolução de questões</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Recomendações automatizadas
+                            <span class="info-icon">i
+                                <div class="tooltip">Sistema automatizado de recomendações de otimização baseado em análise contínua dos recursos</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Recomendações dos especialistas
+                            <span class="info-icon">i
+                                <div class="tooltip">Recomendações personalizadas elaboradas por especialistas FinOps com base na análise manual</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Commitments
+                            <span class="info-icon">i
+                                <div class="tooltip">Gestão e otimização de Reserved Instances, Savings Plans e outros compromissos de longo prazo</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Cursos gravados
+                            <span class="info-icon">i
+                                <div class="tooltip">Acesso a biblioteca de cursos gravados sobre FinOps, cloud economics e melhores práticas</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Requisição de Serviços
+                            <span class="info-icon">i
+                                <div class="tooltip">Portal para solicitação de serviços adicionais e customizações específicas</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Apresent. Exec
+                            <span class="info-icon">i
+                                <div class="tooltip">Apresentações executivas periódicas com resumo de resultados e recomendações estratégicas</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="frequency">Mensal</span></td>
+                        <td class="feature-value"><span class="frequency">Semanal</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Webinars
+                            <span class="info-icon">i
+                                <div class="tooltip">Participação em webinars exclusivos sobre tendências, novidades e casos de uso em FinOps</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Automações Agendadas
+                            <span class="info-icon">i
+                                <div class="tooltip">Automações pelo Autofix que podem ser de smart start-stop, scheduling scale</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Automações inteligentes
+                            <span class="info-icon">i
+                                <div class="tooltip">Ajuste de automações do Autofix com CCA, voltados a EBS, ASG, S3, RDS, além de migração automática de GP2 p GP3, remoção de endpoint VPC inativo e IP elástico desatachado</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Workshop Custom.
+                            <span class="info-icon">i
+                                <div class="tooltip">Workshops personalizados e treinamentos específicos para as necessidades da organização</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Suporte Métricas Custom
+                            <span class="info-icon">i
+                                <div class="tooltip">Desenvolvimento e suporte para métricas customizadas específicas do negócio</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                    <tr class="feature-row">
+                        <td class="feature-name">
+                            Chargeback
+                            <span class="info-icon">i
+                                <div class="tooltip">Sistema de chargeback para alocação precisa de custos por departamento, projeto ou centro de custo</div>
+                            </span>
+                        </td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="cross">✗</span></td>
+                        <td class="feature-value"><span class="check">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Desenvolvido por <span class="logo">Darede</span></p>
+            <p>Especialistas em FinOps e otimização de custos na nuvem</p>
+        </div>
+    </div>
+</body>
+</html>
+
