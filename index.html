@@ -323,10 +323,11 @@
 
     <script>
         // Dados organizados dos planos FinOps
+        
         const finopsData = {
             categories: [
                 {
-                    title: "Onboarding - Setup Inicial",
+                    title: "Setup & Onboarding",
                     features: [
                         {
                             title: "Entendimento da Cloud",
@@ -336,76 +337,97 @@
                             ultimate: true
                         },
                         {
-                            title: "Estrutura de Contas",
+                            title: "Mapeamento da Estrutura de Contas",
                             description: "Organização e estruturação das contas cloud para melhor governança e controle de custos",
                             essential: true,
                             pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Consumo Mensal",
-                            description: "Relatório detalhado do consumo mensal de recursos cloud com análise de tendências",
-                            essential: true,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Política de Tags",
-                            description: "Definição e implementação de políticas de tagueamento para organização e rastreamento de custos",
-                            essential: false,
-                            pro: true,
-                            ultimate: true
-                        }
-                    ]
-                },
-                {
-                    title: "Foundation",
-                    features: [
-                        {
-                            title: "Setup de Alarmes",
-                            description: "Configuração de alertas automáticos para monitoramento de custos e anomalias de gastos",
-                            essential: true,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Assess Maturidade",
+                            title: "Avaliação de Maturidade FinOps",
                             description: "Avaliação do nível de maturidade FinOps da organização com base em frameworks reconhecidos",
                             essential: true,
                             pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Plano de Maturidade",
+                            title: "Plano de Evolução de Maturidade",
                             description: "Além do Assess, entregamos o plano pro cliente no módulo Spaces para ele fazer o acompanhamento",
                             essential: false,
                             pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Criação Dash Custom.",
-                            description: "Desenvolvimento de dashboards personalizados para visualização específica de métricas de negócio",
+                            title: "Acesso a Documento sobre Pier Cloud",
+                            description: "Treinamento inicial para utilização da plataforma Pier e suas funcionalidades básicas",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Apresentação com Demo (new logo)",
+                            description: "Demonstração personalizada das funcionalidades avançadas da plataforma para o cliente",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Configuração de Report Padrão",
+                            description: "Setup inicial da plataforma com configurações padrão Darede",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        }
+                    ]
+                },
+                {
+                    title: "Monitoring & Governance",
+                    features: [
+                        {
+                            title: "Setup de Alarmes de Budget",
+                            description: "Configuração de alertas automáticos para monitoramento de custos e anomalias de gastos",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Notificação de Anomalias",
+                            description: "Sistema automatizado de notificação quando anomalias de custo são detectadas",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Análise Detalhada de Anomalias",
+                            description: "Investigação especializada das causas raiz das anomalias com recomendações específicas",
                             essential: false,
                             pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Setup Automações",
-                            description: "Setup de automações seguindo o módulo Autofix da Pier para otimização automática de recursos",
+                            title: "Monitoramento de Compromissos Financeiros",
+                            description: "Acompanhamento proativo de Reserved Instances, Savings Plans e contratos com prazos de renovação",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Implementação de Tags *",
+                            description: "Implementação prática da política de tags em todos os recursos cloud da organização.      *A definir inclusão no Tier Pro",
+                            essential: false,
+                            pro: false,
+                            ultimate: true
+                        },
+                        {
+                            title: "Controles de Conformidade (SCP)",
+                            description: "Implementação de Service Control Policies para governança e controle de recursos na AWS",
                             essential: false,
                             pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Tagueamento",
-                            description: "Implementação prática da política de tags em todos os recursos cloud da organização",
-                            essential: false,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Revisão Pilar de Custos",
-                            description: "Análise detalhada seguindo o pilar de otimização de custos do Well-Architected Framework",
+                            title: "Controle de Regiões e Recursos",
+                            description: "Configuração de controles para restringir criação de recursos em regiões específicas",
                             essential: false,
                             pro: true,
                             ultimate: true
@@ -413,88 +435,33 @@
                     ]
                 },
                 {
-                    title: "Operation",
+                    title: "Optimization & Insights",
                     features: [
+                        
                         {
-                            title: "Criação de Novos Dashs",
-                            description: "Desenvolvimento contínuo de novos dashboards conforme necessidades emergentes do negócio",
-                            essential: false,
-                            pro: false,
-                            ultimate: true
-                        },
-                        {
-                            title: "Suporte Dashboards",
-                            description: "Suporte técnico e manutenção dos dashboards existentes com atualizações e correções",
-                            essential: false,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Suporte Alertas",
-                            description: "Manutenção e ajustes dos alertas configurados, incluindo novos alertas conforme necessário",
-                            essential: false,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Gestão Maturidade",
-                            description: "Além de atribuir e planejar, a ideia aqui é gerenciar a maturidade do cliente, cobrar pelas ações etc, acompanhar e reportar o estágio dele",
-                            essential: false,
-                            pro: false,
-                            ultimate: true
-                        },
-                        {
-                            title: "Atendimento Consultivo",
-                            description: "Suporte especializado com consultores FinOps para orientação estratégica e resolução de questões",
-                            essential: true,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Recomendações automatizadas",
+                            title: "Recomendações Automatizadas",
                             description: "Sistema automatizado de recomendações de otimização baseado em análise contínua dos recursos",
                             essential: true,
                             pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Recomendações dos especialistas",
+                            title: "Identificação de Oportunidades de Otimização",
+                            description: "Análise proativa para identificar oportunidades de redução de custos e otimização de recursos",
+                            essential: false,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Recomendações de Especialistas",
                             description: "Recomendações personalizadas elaboradas por especialistas FinOps com base na análise manual",
                             essential: false,
                             pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Commitments",
-                            description: "Gestão e otimização de Reserved Instances, Savings Plans e outros compromissos de longo prazo",
-                            essential: true,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Cursos gravados",
-                            description: "Acesso a biblioteca de cursos gravados sobre FinOps, cloud economics e melhores práticas",
-                            essential: true,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Requisição de Serviços",
-                            description: "Portal para solicitação de serviços adicionais e customizações específicas",
-                            essential: false,
-                            pro: true,
-                            ultimate: true
-                        },
-                        {
-                            title: "Apresent. Exec",
-                            description: "Apresentações executivas periódicas com resumo de resultados e recomendações estratégicas",
-                            essential: false,
-                            pro: "Mensal",
-                            ultimate: "Semanal"
-                        },
-                        {
-                            title: "Webinars",
-                            description: "Participação em webinars exclusivos sobre tendências, novidades e casos de uso em FinOps",
+                            title: "Consultoria Proativa para Prevenção de Anomalias",
+                            description: "Análise especializada por consultores para identificar padrões e prevenir futuras anomalias de custo",
                             essential: false,
                             pro: true,
                             ultimate: true
@@ -507,29 +474,95 @@
                             ultimate: true
                         },
                         {
-                            title: "Automações inteligentes",
-                            description: "Ajuste de automações do Autofix com CCA, voltados a EBS, ASG, S3, RDS, além de migração automática de GP2 p GP3, remoção de endpoint VPC inativo e IP elástico desatachado",
+                            title: "Revisão Well-Architected",
+                            description: "Análise detalhada seguindo o pilar de otimização de custos do Well-Architected Framework",
                             essential: false,
-                            pro: false,
+                            pro: true,
+                            ultimate: true
+                        }
+                    ]
+                },
+                {
+                    title: "Analytics & Reporting",
+                    features: [
+                        {
+                            title: "Relatório Executivo Automatizado",
+                            description: "Relatório detalhado do consumo mensal de recursos cloud com análise de tendências",
+                            essential: true,
+                            pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Workshop Custom.",
-                            description: "Workshops personalizados e treinamentos específicos para as necessidades da organização",
+                            title: "Relatório Executivo Personalizado",
+                            description: "Apresentações executivas periódicas com resumo de resultados e recomendações estratégicas",
                             essential: false,
-                            pro: false,
+                            pro: "Mensal",
+                            ultimate: "Semanal"
+                        },
+                        {
+                            title: "Dashboards Personalizados",
+                            description: "Desenvolvimento de dashboards personalizados para visualização específica de métricas de negócio",
+                            essential: false,
+                            pro: true,
                             ultimate: true
                         },
                         {
-                            title: "Suporte Métricas Custom",
+                            title: "Criação de Novos Dashboards*",
+                            description: "Desenvolvimento contínuo de novos dashboards conforme necessidades emergentes do negócio, limitado a 2 Dashboards por mês",
+                            essential: false,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Métricas Customizadas",
                             description: "Desenvolvimento e suporte para métricas customizadas específicas do negócio",
                             essential: false,
                             pro: false,
                             ultimate: true
                         },
                         {
-                            title: "Chargeback",
+                            title: "Sistema de Chargeback",
                             description: "Sistema de chargeback para alocação precisa de custos por departamento, projeto ou centro de custo",
+                            essential: false,
+                            pro: false,
+                            ultimate: true
+                        }
+                    ]
+                },
+                {
+                    title: "Support & Education",
+                    features: [
+                        {
+                            title: "Suporte Técnico da Pier Cloud",
+                            description: "Suporte técnico especializado para resolução de questões da plataforma Pier",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Cursos e Certificações",
+                            description: "Acesso a biblioteca de cursos gravados sobre FinOps, cloud economics e melhores práticas",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Acesso a Webinars Pier/Darede",
+                            description: "Participação em webinars exclusivos sobre tendências, novidades e casos de uso em FinOps",
+                            essential: true,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Suporte a Dashboards existentes",
+                            description: "Suporte técnico e manutenção dos dashboards existentes com atualizações e correções",
+                            essential: false,
+                            pro: true,
+                            ultimate: true
+                        },
+                        {
+                            title: "Workshops Personalizados",
+                            description: "Workshops personalizados e treinamentos específicos para as necessidades da organização",
                             essential: false,
                             pro: false,
                             ultimate: true
@@ -538,7 +571,7 @@
                 }
             ]
         };
-
+        
         // Função para renderizar o valor da feature
         function renderFeatureValue(value, planType) {
             if (value === true) {
